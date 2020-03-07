@@ -6,7 +6,7 @@ const TableHeader = () => {
     <TableHead>
       <TableRow>
         <TableCell>name</TableCell>
-        <TableCell>zipcode</TableCell>
+        <TableCell>zip code</TableCell>
         <TableCell>enum</TableCell>
         <TableCell>date</TableCell>
         <TableCell>date-2</TableCell>
