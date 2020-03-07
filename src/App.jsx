@@ -1,9 +1,13 @@
 import React from "react";
 
+import Header from "./components/header/header";
+import TableMain from "./components/table/table";
+
 const App = () => {
   return (
     <>
-      <h1>Hello</h1>
+      <Header />
+      <TableMain />
     </>
   );
 };
