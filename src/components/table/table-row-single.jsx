@@ -1,8 +1,9 @@
 import React from "react";
 import Faker from "faker";
 import uniquid from "uniquid";
+import { TableRow, TableCell } from "@material-ui/core";
 
-const TableRow = () => {
+const TableRowSingle = () => {
   const data = {
     string: Faker.name.findName(),
     integer: Faker.address.zipCode(),
@@ -23,19 +24,19 @@ const TableRow = () => {
   };
 
   return (
-    <tr key={uniquid()}>
-      <td>{data.string}</td>
-      <td>{data.integer}</td>
-      <td>{data.enum.map(el => el)}</td>
-      <td>{data.localDate.getDay()}</td>
-      <td>{data.instant}</td>
-      <td>
+    <TableRow key={uniquid()}>
+      <TableCell padding="none">{data.string}</TableCell>
+      <TableCell padding="none">{data.integer}</TableCell>
+      <TableCell padding="none">{data.enum.map(el => `${el} `)}</TableCell>
+      <TableCell padding="none">{data.localDate.getDay()}</TableCell>
+      <TableCell padding="none">{data.instant}</TableCell>
+      <TableCell padding="none">
         <b>{`${data.object.money.currency}  `}</b>
         <b>{data.object.money.amount}</b>
-      </td>
-      <td>{data.bool ? "ok" : "error"}</td>
-    </tr>
+      </TableCell>
+      <TableCell padding="none">{data.bool ? "ok" : "error"}</TableCell>
+    </TableRow>
   );
 };
 
-export default TableRow;
+export default TableRowSingle;

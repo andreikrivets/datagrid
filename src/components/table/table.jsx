@@ -1,23 +1,25 @@
 import React from "react";
 
+import { Paper, Table, TableBody } from "@material-ui/core";
+
 import TableHeader from "./table-header";
-import TableRow from "./table-row";
+import TableRowSingle from "./table-row-single";
 
 import "./table-style.css";
 
 const TableMain = () => {
-  const r = new Array(1000).fill("");
+  const rows = new Array(1000).fill("");
   return (
-    <>
-      <table style={{ width: "100%" }}>
+    <Paper>
+      <Table style={{ width: "100%" }}>
         <TableHeader />
-        <tbody>
-          {r.map(() => (
-            <TableRow />
+        <TableBody>
+          {rows.map(() => (
+            <TableRowSingle />
           ))}
-        </tbody>
-      </table>
-    </>
+        </TableBody>
+      </Table>
+    </Paper>
   );
 };
 

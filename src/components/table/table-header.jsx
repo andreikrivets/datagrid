@@ -1,18 +1,19 @@
 import React from "react";
+import { TableHead, TableRow, TableCell } from "@material-ui/core";
 
 const TableHeader = () => {
   return (
-    <thead>
-      <tr>
-        <td>name</td>
-        <td>zipcode</td>
-        <td>enum</td>
-        <td>date</td>
-        <td>date-2</td>
-        <td>money</td>
-        <td>ok</td>
-      </tr>
-    </thead>
+    <TableHead>
+      <TableRow>
+        <TableCell>name</TableCell>
+        <TableCell>zipcode</TableCell>
+        <TableCell>enum</TableCell>
+        <TableCell>date</TableCell>
+        <TableCell>date-2</TableCell>
+        <TableCell>money</TableCell>
+        <TableCell>ok</TableCell>
+      </TableRow>
+    </TableHead>
   );
 };
 
