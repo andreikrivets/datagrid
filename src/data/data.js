@@ -1,6 +1,7 @@
 import Faker from "faker";
 
 const fetchData = () => {
+  Faker.seed(101);
   const makeData = () => {
     return {
       string: Faker.name.findName(),

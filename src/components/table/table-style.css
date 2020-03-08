@@ -1,3 +1,15 @@
 thead {
     cursor: pointer;
 }
+
+.selected-row-asc {
+    background-color: blue;
+}
+
+.asc:after {
+    content: " ^"
+}
+
+.desc:after {
+    content: " v"
+}
