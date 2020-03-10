@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-unused-vars */
@@ -11,35 +12,51 @@ const TableMain = props => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [prevSelected, setPrevSelected] = useState("");
 
-  const { rows, loading, sort, onSort, onSearchChange } = props;
+  const { rows, loading, sort, onSort, onSearchChange, onFilter } = props;
   const handleSort = e => {
     const { classList } = e.target;
-    if (classList.contains("asc"));
     const column = e.target.id;
     onSort(column, sortOrder);
     if (prevSelected) {
       prevSelected.classList.remove("desc");
       prevSelected.classList.remove("asc");
     }
-
     setPrevSelected(e.target);
-    if (sortOrder === "asc") {
-      classList.add("asc");
-      setSortOrder("desc");
-    } else {
-      classList.add("desc");
-      setSortOrder("asc");
-    }
+    setSortOrder(prevSortOrder => (prevSortOrder === "asc" ? "desc" : "asc"));
+    if (sortOrder === "asc") classList.add("asc");
+    else classList.add("desc");
   };
 
   const handleSearch = e => {
     onSearchChange(e.target.value);
   };
 
+  const handleBooleanTogglerOk = e => {
+    onFilter(e.target.checked ? "ok" : null);
+  };
+
+  const handleBooleanTogglerErr = e => {
+    onFilter(e.target.checked ? "false" : null);
+  };
+
   return (
-    <>
-      <input type="text" onKeyDown={handleSearch} />
-      <table style={{ width: "100%", fontFamily: "monospace" }}>
+    <div style={{ fontFamily: "monospace" }}>
+      <div>
+        <input type="text" onKeyDown={handleSearch} />
+        <label htmlFor="boolean-toggle-ok">ok</label>
+        <input
+          type="checkbox"
+          id="boolean-toggle-ok"
+          onChange={handleBooleanTogglerOk}
+        />
+        <label htmlFor="boolean-toggle-error">error</label>
+        <input
+          type="checkbox"
+          id="boolean-toggle-error"
+          onChange={handleBooleanTogglerErr}
+        />
+      </div>
+      <table style={{ width: "100%" }}>
         <thead style={{ fontWeight: "bolder" }}>
           <tr style={{ cursor: "pointer" }}>
             <td id="string" onClick={handleSort}>
@@ -82,7 +99,7 @@ const TableMain = props => {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 

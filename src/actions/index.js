@@ -14,5 +14,9 @@ const onSort = (property, direction) => ({
 });
 
 const onSearchChange = search => ({ type: "TABLE_SEARCH", payload: search });
+const onFilter = filter => ({
+  type: "BOLEAN_TOGGLER",
+  payload: filter
+});
 
-export { fetchInfo, onSort, onSearchChange };
+export { fetchInfo, onSort, onSearchChange, onFilter };

@@ -5,7 +5,8 @@ const defaultDataState = {
 };
 const defaultTableState = {
   sort: {},
-  search: ""
+  search: "",
+  filter: ""
 };
 
 const information = (state = defaultDataState, action) => {
@@ -23,6 +24,8 @@ const table = (state = defaultTableState, action) => {
       return { ...state, sort: action.payload };
     case "TABLE_SEARCH":
       return { ...state, search: action.payload };
+    case "BOLEAN_TOGGLER":
+      return { ...state, filter: action.payload };
     default:
       return state;
   }
