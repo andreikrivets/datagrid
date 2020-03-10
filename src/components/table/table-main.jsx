@@ -17,6 +17,11 @@ const TableMain = props => {
     if (classList.contains("asc"));
     const column = e.target.id;
     onSort(column, sortOrder);
+    if (prevSelected) {
+      prevSelected.classList.remove("desc");
+      prevSelected.classList.remove("asc");
+    }
+
     setPrevSelected(e.target);
     if (sortOrder === "asc") {
       classList.add("asc");
