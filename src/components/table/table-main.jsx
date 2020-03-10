@@ -11,6 +11,8 @@ import "./table-style.css";
 const TableMain = props => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [prevSelected, setPrevSelected] = useState("");
+  const [okToggler, setOkToggler] = useState(false);
+  const [errToggler, setErrToggler] = useState(false);
 
   const { rows, loading, sort, onSort, onSearchChange, onFilter } = props;
   const handleSort = e => {
@@ -28,14 +30,19 @@ const TableMain = props => {
   };
 
   const handleSearch = e => {
-    onSearchChange(e.target.value);
+    if (e.target.value === "") onSearchChange("");
+    else onSearchChange(e.target.value);
   };
 
   const handleBooleanTogglerOk = e => {
+    setErrToggler(false);
+    setOkToggler(prevOkToggler => !prevOkToggler);
     onFilter(e.target.checked ? "ok" : null);
   };
 
   const handleBooleanTogglerErr = e => {
+    setOkToggler(false);
+    setErrToggler(prevErrToggler => !prevErrToggler);
     onFilter(e.target.checked ? "false" : null);
   };
 
@@ -48,12 +55,14 @@ const TableMain = props => {
           type="checkbox"
           id="boolean-toggle-ok"
           onChange={handleBooleanTogglerOk}
+          checked={okToggler}
         />
         <label htmlFor="boolean-toggle-error">error</label>
         <input
           type="checkbox"
           id="boolean-toggle-error"
           onChange={handleBooleanTogglerErr}
+          checked={errToggler}
         />
       </div>
       <table style={{ width: "100%" }}>

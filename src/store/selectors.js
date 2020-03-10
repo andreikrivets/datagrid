@@ -2,21 +2,19 @@ import _orderBy from "lodash/orderBy";
 import { createSelector } from "reselect";
 
 const getBoolRows = (information, filter) => {
-  const query = filter === "ok" ? new RegExp(true) : new RegExp(false);
+  const query = filter === "ok";
   if (!filter) return information;
-  return information.filter(row => [row.bool].find(str => query.test(str)));
+  return information.filter(row => row.bool === query);
 };
 
 const getFilteredRows = (information, search, filter) => {
   const inf = getBoolRows(information, filter);
-  if (!search) return inf;
+  //   if (!search) return inf;
   try {
     const searchRegex = new RegExp(search, "i"); // no escaping is a feature!
-    return information.filter(row =>
-      [row.string].find(str => searchRegex.test(str))
-    );
+    return inf.filter(row => [row.string].find(str => searchRegex.test(str)));
   } catch (e) {
-    return information;
+    return inf;
   }
 };
 
