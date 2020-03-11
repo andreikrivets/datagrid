@@ -1,16 +1,20 @@
 import Faker from "faker";
 
+import eData from "./enum";
+
 const fetchData = () => {
   Faker.seed(101);
   const makeData = () => {
     return {
       string: Faker.name.findName(),
       integer: Faker.address.zipCode(),
-      enum: [
-        Faker.commerce.productAdjective(),
-        Faker.commerce.productMaterial(),
-        Faker.commerce.product()
-      ],
+      enum:
+        eData[
+          Faker.random
+            .number()
+            .toString()
+            .slice(0, 1) - 1
+        ],
       localDate: Faker.date.recent(),
       instant: Faker.date.recent().getTime(),
       object: {
@@ -23,7 +27,7 @@ const fetchData = () => {
     };
   };
 
-  return [...new Array(50)].map(() => makeData());
+  return [...new Array(200)].map(() => makeData());
 };
 
 export default fetchData;

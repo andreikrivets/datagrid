@@ -2,7 +2,7 @@ import _orderBy from "lodash/orderBy";
 import { createSelector } from "reselect";
 
 const getBoolRows = (information, filter) => {
-  const query = filter === "ok";
+  const query = filter === "open";
   if (!filter) return information;
   return information.filter(row => row.bool === query);
 };
@@ -30,7 +30,6 @@ const rowsSelector = createSelector(
   ({ sort, search, filter }, information) => {
     const query = search[0];
     const column = search[1];
-    console.log(column);
     return filterAndSort(information, sort, query, filter, column);
   }
 );

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -21,7 +22,7 @@ const TableMain = props => {
   const options = [
     { value: "string", label: "name" },
     { value: "integer", label: "zip" },
-    { value: "day", label: "day" }
+    { value: "enum", label: "bank" }
   ];
   const [searchCol, setSearchCol] = useState(() => options.map(el => el.value));
   // console.log(searchCol);
@@ -40,12 +41,10 @@ const TableMain = props => {
     else classList.add("desc");
   };
 
-  // const handleSearch = e => onSearchChange(e.target.value);
-
   const handleBooleanTogglerOk = e => {
     setErrToggler(false);
     setOkToggler(prevOkToggler => !prevOkToggler);
-    onFilter(e.target.checked ? "ok" : null);
+    onFilter(e.target.checked ? "open" : null);
   };
 
   const handleBooleanTogglerErr = e => {
@@ -68,14 +67,14 @@ const TableMain = props => {
           type="text"
           onKeyDown={e => onSearchChange(e.target.value, searchCol)}
         />
-        <label htmlFor="boolean-toggle-ok">ok</label>
+        <label htmlFor="boolean-toggle-ok">open</label>
         <input
           type="checkbox"
           id="boolean-toggle-ok"
           onChange={handleBooleanTogglerOk}
           checked={okToggler}
         />
-        <label htmlFor="boolean-toggle-error">error</label>
+        <label htmlFor="boolean-toggle-error">close</label>
         <input
           type="checkbox"
           id="boolean-toggle-error"
@@ -86,44 +85,52 @@ const TableMain = props => {
       <table style={{ width: "100%" }}>
         <thead style={{ fontWeight: "bolder" }}>
           <tr style={{ cursor: "pointer" }}>
-            <td id="string" onClick={handleSort}>
+            <td id="string" onClick={handleSort} className="fixed">
               name
             </td>
-            <td id="integer" onClick={handleSort}>
+            <td id="integer" onClick={handleSort} className="fixed">
               zip code
             </td>
-            <td id="enum" onClick={handleSort}>
-              enum
+            <td id="enum" onClick={handleSort} className="fixed">
+              bank
             </td>
-            <td id="localDate" onClick={handleSort}>
+            <td id="localDate" onClick={handleSort} className="fixed">
               date
             </td>
-            <td id="instant" onClick={handleSort}>
-              date-2
+            <td id="instant" onClick={handleSort} className="fixed">
+              time
             </td>
-            <td id="money" onClick={handleSort}>
-              money
+            <td id="money" onClick={handleSort} className="fixed">
+              amount
             </td>
-            <td id="bool" onClick={handleSort}>
+            <td id="bool" onClick={handleSort} className="fixed">
               ok?
             </td>
           </tr>
         </thead>
         <tbody>
-          {rows.map(el => (
-            <tr key={key(el)}>
-              <td>{el.string}</td>
-              <td>{el.integer}</td>
-              <td>{el.enum.map(e => `${e} `)}</td>
-              <td>{el.localDate.getDay()}</td>
-              <td>{el.instant}</td>
-              <td>
-                <b>{`${el.object.money.currency}  `}</b>
-                <b>{el.object.money.amount}</b>
-              </td>
-              <td>{el.bool ? "ok" : "error"}</td>
-            </tr>
-          ))}
+          {rows.map(el => {
+            const hours = new Date(el.instant * 1000).getHours().toString();
+            const minutes = new Date(el.instant * 1000).getMinutes().toString();
+            return (
+              <tr key={key(el)}>
+                <td>{el.string}</td>
+                <td>{el.integer}</td>
+                <td>{el.enum}</td>
+                <td>{el.localDate.toLocaleDateString()}</td>
+                <td>
+                  <b>{hours.length === 1 ? `0${hours}` : hours}</b>
+                  <b>:</b>
+                  <b>{minutes.length === 1 ? `0${minutes}` : minutes}</b>
+                </td>
+                <td>
+                  <b>{`${el.object.money.currency}  `}</b>
+                  <b>{el.object.money.amount}</b>
+                </td>
+                <td>{el.bool ? "open" : "close"}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
