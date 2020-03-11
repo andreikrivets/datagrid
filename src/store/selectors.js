@@ -2,9 +2,15 @@ import _orderBy from "lodash/orderBy";
 import { createSelector } from "reselect";
 
 const getBoolRows = (information, filter) => {
-  const query = filter === "open";
   if (!filter) return information;
-  return information.filter(row => row.bool === query);
+  if (filter === "open" || filter === "close") {
+    const query = filter === "open";
+    return information.filter(row => row.bool === query);
+  }
+  const query = filter.split(" ");
+  return information.filter(row => {
+    return [row.enum].find(str => new RegExp(query, "i").test(str));
+  });
 };
 
 const getFilteredRows = (information, search, filter, column) => {

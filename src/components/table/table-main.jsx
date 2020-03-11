@@ -10,6 +10,8 @@ import React, { useState } from "react";
 import Select from "react-select";
 import key from "weak-key";
 
+import eData from "../../data/enum";
+
 import "./table-style.css";
 
 const TableMain = props => {
@@ -24,8 +26,10 @@ const TableMain = props => {
     { value: "integer", label: "zip" },
     { value: "enum", label: "bank" }
   ];
+
   const [searchCol, setSearchCol] = useState(() => options.map(el => el.value));
-  // console.log(searchCol);
+
+  const enums = eData.map(el => ({ value: el, label: el.toLocaleLowerCase() }));
 
   const handleSort = e => {
     const { classList } = e.target;
@@ -50,8 +54,11 @@ const TableMain = props => {
   const handleBooleanTogglerErr = e => {
     setOkToggler(false);
     setErrToggler(prevErrToggler => !prevErrToggler);
-    onFilter(e.target.checked ? "false" : null);
+    onFilter(e.target.checked ? "close" : null);
   };
+
+  const handleBanksChange = e =>
+    onFilter(e ? e.map(el => el.value).join(" ") : null);
 
   return (
     <div style={{ fontFamily: "monospace" }}>
@@ -91,8 +98,14 @@ const TableMain = props => {
             <td id="integer" onClick={handleSort} className="fixed">
               zip code
             </td>
-            <td id="enum" onClick={handleSort} className="fixed">
-              bank
+            <td id="enum" className="fixed" style={{ width: "300px" }}>
+              <Select
+                isMulti
+                noOptionsMessage={() => null}
+                options={enums}
+                placeholder="banks"
+                onChange={handleBanksChange}
+              />
             </td>
             <td id="localDate" onClick={handleSort} className="fixed">
               date
