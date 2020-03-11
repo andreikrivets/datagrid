@@ -13,3 +13,10 @@ thead {
 .desc:after {
     content: " v"
 }
+
+.fixed {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 10px;
+    background-color: cyan;
+}
