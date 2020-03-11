@@ -13,7 +13,10 @@ const onSort = (property, direction) => ({
   payload: [property, direction]
 });
 
-const onSearchChange = search => ({ type: "TABLE_SEARCH", payload: search });
+const onSearchChange = (query, column) => ({
+  type: "TABLE_SEARCH",
+  payload: [query, column]
+});
 const onFilter = filter => ({
   type: "BOLEAN_TOGGLER",
   payload: filter

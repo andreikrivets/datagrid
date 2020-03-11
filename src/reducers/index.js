@@ -5,7 +5,7 @@ const defaultDataState = {
 };
 const defaultTableState = {
   sort: {},
-  search: "",
+  search: {},
   filter: ""
 };
 

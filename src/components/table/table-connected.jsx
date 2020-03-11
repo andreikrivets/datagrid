@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import TableMain from "./table-main";
-import { onSort, onFilter } from "../../actions";
+import { onSort, onFilter, onSearchChange } from "../../actions";
 import rowsSelector from "../../store/selectors";
 
 const mapStateToProps = state => {
@@ -18,8 +18,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSearchChange: search =>
-      dispatch({ type: "TABLE_SEARCH", payload: search }),
+    onSearchChange: (query, column) => dispatch(onSearchChange(query, column)),
     onSort: (property, direction) => dispatch(onSort(property, direction)),
     onFilter: filter => dispatch(onFilter(filter))
   };
