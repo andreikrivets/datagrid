@@ -1,18 +1,19 @@
 import { connect } from "react-redux";
 
 import TableMain from "./table-main";
-import { onSort, onFilter, onSearchChange } from "../../actions";
+import { onSort, onFilter, onSearchChange, onDelete } from "../../actions";
 import rowsSelector from "../../store/selectors";
 
 const mapStateToProps = state => {
-  const { search, sort, filter } = state.table;
+  const { search, sort, filter, row } = state.table;
   return {
     data: state.information.data,
     loading: state.information.loading,
     search,
     sort,
     filter,
-    rows: rowsSelector(state)
+    rows: rowsSelector(state),
+    row
   };
 };
 
@@ -20,7 +21,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onSearchChange: (query, column) => dispatch(onSearchChange(query, column)),
     onSort: (property, direction) => dispatch(onSort(property, direction)),
-    onFilter: filter => dispatch(onFilter(filter))
+    onFilter: filter => dispatch(onFilter(filter)),
+    onDelete: row => dispatch(onDelete(row))
   };
 };
 

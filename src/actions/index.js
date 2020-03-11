@@ -22,4 +22,9 @@ const onFilter = filter => ({
   payload: filter
 });
 
-export { fetchInfo, onSort, onSearchChange, onFilter };
+const onDelete = row => ({
+  type: "DELETE_ROW",
+  payload: row
+});
+
+export { fetchInfo, onSort, onSearchChange, onFilter, onDelete };

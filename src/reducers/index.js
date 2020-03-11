@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 const defaultDataState = {
   data: {},
-  loading: true
+  loading: true,
+  row: []
 };
 const defaultTableState = {
   sort: {},
@@ -10,9 +11,15 @@ const defaultTableState = {
 };
 
 const information = (state = defaultDataState, action) => {
+  console.log(state);
   switch (action.type) {
     case "CREATE_DATA":
       return { ...state, data: action.data, loading: true };
+    case "DELETE_ROW":
+      return {
+        ...state,
+        data: state.data.filter((e, i) => i !== action.payload[0] - 1)
+      };
     default:
       return state;
   }

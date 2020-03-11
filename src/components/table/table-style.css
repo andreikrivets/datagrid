@@ -20,3 +20,9 @@ thead {
     top: 10px;
     background-color: cyan;
 }
+
+.selected-row {
+    background-color: cyan;
+    font-weight: bolder;
+    transition: all 0.2s cubic-bezier();
+}

@@ -19,7 +19,16 @@ const TableMain = props => {
   const [okToggler, setOkToggler] = useState(false);
   const [errToggler, setErrToggler] = useState(false);
   const [num, setNum] = useState(0);
-  const { rows, loading, sort, onSort, onSearchChange, onFilter } = props;
+  const {
+    rows,
+    loading,
+    sort,
+    onSort,
+    onSearchChange,
+    onFilter,
+    onDelete
+  } = props;
+  let selectedRows = [2, 4, 6];
 
   const options = [
     { value: "string", label: "name" },
@@ -33,8 +42,7 @@ const TableMain = props => {
 
   const handleSort = e => {
     const { classList } = e.target;
-    const variants = ["asc", "desc", null];
-    const variant = variants[num];
+    const variant = ["asc", "desc", null][num];
     const column = e.target.id;
     onSort(column, variant);
 
@@ -65,6 +73,19 @@ const TableMain = props => {
 
   const handleBanksChange = e =>
     onFilter(e ? e.map(el => el.value).join(" ") : null);
+
+  const handleRowSelect = e => {
+    const { classList } = e.target.parentNode;
+    if (classList.contains("selected-row")) {
+      classList.remove("selected-row");
+      if (selectedRows.length) {
+        selectedRows = selectedRows.filter(el => el !== e.target);
+      }
+    } else {
+      classList.add("selected-row");
+      selectedRows.push(e.target.parentNode.rowIndex);
+    }
+  };
 
   return (
     <div style={{ fontFamily: "monospace" }}>
@@ -98,8 +119,18 @@ const TableMain = props => {
       <table style={{ width: "100%" }}>
         <thead style={{ fontWeight: "bolder" }}>
           <tr style={{ cursor: "pointer" }}>
-            <td id="id" onClick={handleSort} className="fixed">
-              id
+            <td
+              id="id"
+              className="fixed"
+              style={{ display: "flex", flexDirection: "column" }}
+            >
+              <b>id</b>
+              <input
+                type="button"
+                style={{ width: "10px", height: "20px" }}
+                value="х"
+                onClick={() => onDelete(selectedRows)}
+              />
             </td>
             <td id="string" onClick={handleSort} className="fixed">
               name
@@ -135,8 +166,10 @@ const TableMain = props => {
             const hours = new Date(el.instant * 1000).getHours().toString();
             const minutes = new Date(el.instant * 1000).getMinutes().toString();
             return (
-              <tr key={key(el)}>
-                <td>{el.id}</td>
+              <tr key={key(el)} onClick={handleRowSelect}>
+                <td style={{ background: "cyan", cursor: "pointer" }}>
+                  {el.id}
+                </td>
                 <td>{el.string}</td>
                 <td>{el.integer}</td>
                 <td>{el.enum}</td>
