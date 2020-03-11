@@ -27,8 +27,15 @@ const getFilteredRows = (information, search, filter, column) => {
   }
 };
 
-const filterAndSort = (data, sort, search, filter, column) =>
-  _orderBy(getFilteredRows(data, search, filter, column), sort[0], sort[1]);
+const filterAndSort = (data, sort, search, filter, column) => {
+  let sortFunc = sort;
+  if (!sortFunc[1]) sortFunc = ["id", "asc"];
+  return _orderBy(
+    getFilteredRows(data, search, filter, column),
+    sortFunc[0],
+    sortFunc[1]
+  );
+};
 
 const rowsSelector = createSelector(
   state => state.table,

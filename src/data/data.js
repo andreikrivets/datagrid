@@ -4,10 +4,12 @@ import eData from "./enum";
 
 const fetchData = () => {
   Faker.seed(101);
+  let i = 0;
   const makeData = () => {
     return {
+      id: i,
       string: Faker.name.findName(),
-      integer: Faker.address.zipCode(),
+      integer: Faker.random.number(),
       enum:
         eData[
           Faker.random
@@ -27,7 +29,10 @@ const fetchData = () => {
     };
   };
 
-  return [...new Array(200)].map(() => makeData());
+  return [...new Array(200)].map(() => {
+    i += 1;
+    return makeData();
+  });
 };
 
 export default fetchData;

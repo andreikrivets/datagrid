@@ -15,10 +15,10 @@ import eData from "../../data/enum";
 import "./table-style.css";
 
 const TableMain = props => {
-  const [sortOrder, setSortOrder] = useState("asc");
   const [prevSelected, setPrevSelected] = useState("");
   const [okToggler, setOkToggler] = useState(false);
   const [errToggler, setErrToggler] = useState(false);
+  const [num, setNum] = useState(0);
   const { rows, loading, sort, onSort, onSearchChange, onFilter } = props;
 
   const options = [
@@ -33,16 +33,22 @@ const TableMain = props => {
 
   const handleSort = e => {
     const { classList } = e.target;
+    const variants = ["asc", "desc", null];
+    const variant = variants[num];
     const column = e.target.id;
-    onSort(column, sortOrder);
-    if (prevSelected) {
-      prevSelected.classList.remove("desc");
-      prevSelected.classList.remove("asc");
-    }
+    onSort(column, variant);
+
+    const clearPreviousSelected = () => {
+      if (prevSelected) {
+        prevSelected.classList.remove("desc");
+        prevSelected.classList.remove("asc");
+      }
+    };
+
+    clearPreviousSelected();
     setPrevSelected(e.target);
-    setSortOrder(prevSortOrder => (prevSortOrder === "asc" ? "desc" : "asc"));
-    if (sortOrder === "asc") classList.add("asc");
-    else classList.add("desc");
+    setNum(prevNum => (prevNum === 2 ? 0 : num + 1));
+    if (variant) classList.add(variant);
   };
 
   const handleBooleanTogglerOk = e => {
@@ -63,16 +69,16 @@ const TableMain = props => {
   return (
     <div style={{ fontFamily: "monospace" }}>
       <div style={{ display: "flex", justifyContent: "start" }}>
+        <input
+          type="text"
+          onKeyDown={e => onSearchChange(e.target.value, searchCol)}
+        />
         <Select
           isMulti
           noOptionsMessage={() => null}
           options={options}
           defaultValue={options}
           onChange={e => (e ? setSearchCol(() => e.map(el => el.value)) : e)}
-        />
-        <input
-          type="text"
-          onKeyDown={e => onSearchChange(e.target.value, searchCol)}
         />
         <label htmlFor="boolean-toggle-ok">open</label>
         <input
@@ -92,6 +98,9 @@ const TableMain = props => {
       <table style={{ width: "100%" }}>
         <thead style={{ fontWeight: "bolder" }}>
           <tr style={{ cursor: "pointer" }}>
+            <td id="id" onClick={handleSort} className="fixed">
+              id
+            </td>
             <td id="string" onClick={handleSort} className="fixed">
               name
             </td>
@@ -127,6 +136,7 @@ const TableMain = props => {
             const minutes = new Date(el.instant * 1000).getMinutes().toString();
             return (
               <tr key={key(el)}>
+                <td>{el.id}</td>
                 <td>{el.string}</td>
                 <td>{el.integer}</td>
                 <td>{el.enum}</td>
