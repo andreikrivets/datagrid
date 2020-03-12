@@ -26,9 +26,11 @@ const TableMain = props => {
     onSort,
     onSearchChange,
     onFilter,
-    onDelete
+    onDelete,
+    onSelect,
+    onUnselect
   } = props;
-  let selectedRows = [2, 4, 6];
+  const selectedRows = [];
 
   const options = [
     { value: "string", label: "name" },
@@ -75,15 +77,14 @@ const TableMain = props => {
     onFilter(e ? e.map(el => el.value).join(" ") : null);
 
   const handleRowSelect = e => {
+    const { innerText } = e.target.parentNode.childNodes[0];
     const { classList } = e.target.parentNode;
     if (classList.contains("selected-row")) {
       classList.remove("selected-row");
-      if (selectedRows.length) {
-        selectedRows = selectedRows.filter(el => el !== e.target);
-      }
+      onUnselect(+innerText);
     } else {
       classList.add("selected-row");
-      selectedRows.push(e.target.parentNode.rowIndex);
+      onSelect(+innerText);
     }
   };
 
@@ -167,9 +168,7 @@ const TableMain = props => {
             const minutes = new Date(el.instant * 1000).getMinutes().toString();
             return (
               <tr key={key(el)} onClick={handleRowSelect}>
-                <td style={{ background: "cyan", cursor: "pointer" }}>
-                  {el.id}
-                </td>
+                <td className="first-col">{el.id}</td>
                 <td>{el.string}</td>
                 <td>{el.integer}</td>
                 <td>{el.enum}</td>

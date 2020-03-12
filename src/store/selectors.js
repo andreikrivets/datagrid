@@ -8,9 +8,15 @@ const getBoolRows = (information, filter) => {
     return information.filter(row => row.bool === query);
   }
   const query = filter.split(" ");
-  return information.filter(row => {
-    return [row.enum].find(str => new RegExp(query, "i").test(str));
+  const array = query.map(e => information.map(el => el.enum === e));
+  const concatArr = array[0].map((el, i) => {
+    let element = false;
+    new Array(query.length).fill("").forEach((e, item) => {
+      element += array[item][i];
+    });
+    return element;
   });
+  return information.filter((row, i) => concatArr[i]);
 };
 
 const getFilteredRows = (information, search, filter, column) => {

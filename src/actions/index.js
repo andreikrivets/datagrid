@@ -27,4 +27,22 @@ const onDelete = row => ({
   payload: row
 });
 
-export { fetchInfo, onSort, onSearchChange, onFilter, onDelete };
+const onSelect = selected => ({
+  type: "SELECT_ROW",
+  selected
+});
+
+const onUnselect = unselected => ({
+  type: "UNSELECT_ROW",
+  unselected
+});
+
+export {
+  fetchInfo,
+  onSort,
+  onSearchChange,
+  onFilter,
+  onDelete,
+  onSelect,
+  onUnselect
+};

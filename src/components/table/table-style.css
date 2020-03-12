@@ -7,11 +7,11 @@ thead {
 }
 
 .asc:after {
-    content: " ^"
+    content: " ↑"
 }
 
 .desc:after {
-    content: " v"
+    content: " ↓"
 }
 
 .fixed {
@@ -25,4 +25,9 @@ thead {
     background-color: cyan;
     font-weight: bolder;
     transition: all 0.2s cubic-bezier();
+}
+
+.first-col {
+    background: cyan;
+    cursor: pointer;
 }

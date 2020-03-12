@@ -2,8 +2,10 @@
 const defaultDataState = {
   data: {},
   loading: true,
-  row: []
+  row: [],
+  selected: []
 };
+
 const defaultTableState = {
   sort: {},
   search: {},
@@ -11,15 +13,37 @@ const defaultTableState = {
 };
 
 const information = (state = defaultDataState, action) => {
-  console.log(state);
   switch (action.type) {
     case "CREATE_DATA":
       return { ...state, data: action.data, loading: true };
-    case "DELETE_ROW":
+    case "DELETE_ROW": {
+      const badSolve = data => {
+        if (!state.selected) return data;
+        const array = state.selected.map(e => data.map(el => el.id === e));
+        const concatArr = array[0].map((el, i) => {
+          let element = false;
+          new Array(state.selected.length).fill("").forEach((e, item) => {
+            element += array[item][i];
+          });
+          return element;
+        });
+        return state.data.filter((row, i) => !concatArr[i]);
+      };
       return {
         ...state,
-        data: state.data.filter((e, i) => i !== action.payload[0] - 1)
+        data: badSolve(state.data),
+        selected: []
       };
+    }
+    case "SELECT_ROW":
+      return { ...state, selected: [...state.selected, action.selected] };
+    case "UNSELECT_ROW": {
+      if (!state.selected) return state;
+      const un = state.selected.filter((el, i) => el !== action.unselected);
+      console.log(un);
+      return { ...state, selected: [...state.selected, action.selected] };
+    }
+
     default:
       return state;
   }
