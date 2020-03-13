@@ -38,10 +38,10 @@ const information = (state = defaultDataState, action) => {
     case "SELECT_ROW":
       return { ...state, selected: [...state.selected, action.selected] };
     case "UNSELECT_ROW": {
-      if (!state.selected) return state;
-      const un = state.selected.filter((el, i) => el !== action.unselected);
-      console.log(un);
-      return { ...state, selected: [...state.selected, action.selected] };
+      return {
+        ...state,
+        selected: state.selected.filter((el, i) => el !== action.unselected)
+      };
     }
 
     default:
