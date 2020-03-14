@@ -22,6 +22,7 @@ const TableMain = props => {
   const [okToggler, setOkToggler] = useState(false);
   const [errToggler, setErrToggler] = useState(false);
   const [num, setNum] = useState(0);
+  const [isVirtualized, setIsVirtualised] = useState(true);
   const {
     rows,
     loading,
@@ -79,7 +80,7 @@ const TableMain = props => {
       onSelect(+innerText);
     }
   };
-  const v = 0;
+
   return (
     <div style={{ fontFamily: "monospace" }}>
       <TableLabel
@@ -88,18 +89,20 @@ const TableMain = props => {
         handleBooleanTogglerErr={handleBooleanTogglerErr}
         okToggler={okToggler}
         errToggler={errToggler}
+        setIsVirtualised={setIsVirtualised}
       />
-      <table style={{ width: "100%" }}>
+      <div>
         <TableHeader
           handleSort={handleSort}
           handleBanksChange={handleBanksChange}
           onDelete={onDelete}
         />
-        {/* <tbody> */}
+      </div>
+      {isVirtualized ? (
         <TableBodyCl rows={rows} handleRowSelect={handleRowSelect} />
-        {/* </tbody> */}
-      </table>
-      {/* <TableBodyVirt rows={rows} handleRowSelect={handleRowSelect} /> */}
+      ) : (
+        <TableBodyVirt rows={rows} handleRowSelect={handleRowSelect} />
+      )}
     </div>
   );
 };

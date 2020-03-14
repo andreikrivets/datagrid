@@ -8,13 +8,13 @@ import TableRow from "./table-row";
 
 const TableBodyCl = ({ rows, handleRowSelect }) => {
   return (
-    <tbody>
+    <div>
       {rows.map(el => {
         return (
           <TableRow el={el} key={key(el)} handleRowSelect={handleRowSelect} />
         );
       })}
-    </tbody>
+    </div>
   );
 };
 

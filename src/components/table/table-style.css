@@ -19,6 +19,12 @@ thead {
     position: -webkit-sticky;
     top: 10px;
     background-color: cyan;
+    width: 20%;
+    z-index: 10;
+}
+
+.row-el {
+    width: 20%
 }
 
 .selected-row {
@@ -30,4 +36,5 @@ thead {
 .first-col {
     background: cyan;
     cursor: pointer;
+    width: 5%
 }

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React from "react";
 import key from "weak-key";
@@ -7,23 +9,27 @@ const TableRow = props => {
   const hours = new Date(el.instant * 1000).getHours().toString();
   const minutes = new Date(el.instant * 1000).getMinutes().toString();
   return (
-    <tr key={key(el)} onClick={handleRowSelect}>
-      <td className="first-col">{el.id}</td>
-      <td>{el.string}</td>
-      <td>{el.integer}</td>
-      <td>{el.enum}</td>
-      <td>{el.localDate.toLocaleDateString()}</td>
-      <td>
+    <div
+      key={key(el)}
+      onClick={handleRowSelect}
+      style={{ display: "flex", justifyContent: "space-around" }}
+    >
+      <div className="first-col">{el.id}</div>
+      <div className="row-el">{el.string}</div>
+      <div className="row-el">{el.integer}</div>
+      <div className="row-el">{el.enum}</div>
+      <div className="row-el">{el.localDate.toLocaleDateString()}</div>
+      <div className="row-el">
         <b>{hours.length === 1 ? `0${hours}` : hours}</b>
         <b>:</b>
         <b>{minutes.length === 1 ? `0${minutes}` : minutes}</b>
-      </td>
-      <td>
+      </div>
+      <div className="row-el">
         <b>{`${el.object.money.currency}  `}</b>
         <b>{el.object.money.amount}</b>
-      </td>
-      <td>{el.bool ? "open" : "close"}</td>
-    </tr>
+      </div>
+      <div className="row-el">{el.bool ? "open" : "close"}</div>
+    </div>
   );
 };
 

@@ -9,7 +9,8 @@ const TableLabel = props => {
     handleBooleanTogglerOk,
     handleBooleanTogglerErr,
     okToggler,
-    errToggler
+    errToggler,
+    setIsVirtualised
   } = props;
   const options = [
     { value: "string", label: "name" },
@@ -43,6 +44,13 @@ const TableLabel = props => {
         id="boolean-toggle-error"
         onChange={handleBooleanTogglerErr}
         checked={errToggler}
+      />
+      <label htmlFor="virtualization">virtualization</label>
+      <input
+        type="checkbox"
+        name="vitrualization"
+        id="virtualization"
+        onChange={() => setIsVirtualised(prev => !prev)}
       />
     </div>
   );

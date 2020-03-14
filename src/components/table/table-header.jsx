@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
@@ -13,11 +14,17 @@ const TableHeader = props => {
   const enums = eData.map(el => ({ value: el, label: el.toLocaleLowerCase() }));
 
   return (
-    <thead style={{ fontWeight: "bolder" }}>
-      <tr style={{ cursor: "pointer" }}>
-        <td
+    <div style={{ fontWeight: "bolder" }}>
+      <div
+        style={{
+          cursor: "pointer",
+          display: "flex",
+          justifyContent: "space-around"
+        }}
+      >
+        <div
           id="id"
-          className="fixed"
+          className="fixed first-col"
           style={{ display: "flex", flexDirection: "column" }}
         >
           <b>id</b>
@@ -27,14 +34,14 @@ const TableHeader = props => {
             value="х"
             onClick={() => onDelete()}
           />
-        </td>
-        <td id="string" onClick={handleSort} className="fixed">
+        </div>
+        <div id="sdiving" onClick={handleSort} className="fixed">
           name
-        </td>
-        <td id="integer" onClick={handleSort} className="fixed">
+        </div>
+        <div id="integer" onClick={handleSort} className="fixed">
           zip code
-        </td>
-        <td id="enum" className="fixed" style={{ width: "300px" }}>
+        </div>
+        <div id="enum" className="fixed">
           <Select
             isMulti
             noOptionsMessage={() => null}
@@ -42,21 +49,21 @@ const TableHeader = props => {
             placeholder="banks"
             onChange={handleBanksChange}
           />
-        </td>
-        <td id="localDate" onClick={handleSort} className="fixed">
+        </div>
+        <div id="localDate" onClick={handleSort} className="fixed">
           date
-        </td>
-        <td id="instant" onClick={handleSort} className="fixed">
+        </div>
+        <div id="instant" onClick={handleSort} className="fixed">
           time
-        </td>
-        <td id="money" onClick={handleSort} className="fixed">
+        </div>
+        <div id="money" onClick={handleSort} className="fixed">
           amount
-        </td>
-        <td id="bool" onClick={handleSort} className="fixed">
+        </div>
+        <div id="bool" onClick={handleSort} className="fixed">
           ok?
-        </td>
-      </tr>
-    </thead>
+        </div>
+      </div>
+    </div>
   );
 };
 

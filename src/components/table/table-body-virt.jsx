@@ -1,13 +1,18 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { FixedSizeList as List } from "react-window";
-import TableRow from "./table-row";
+import AutoSizer from "react-virtualized-auto-sizer";
+
+import TableRowVirt from "./table-row-virt";
 
 const Row = data => props => {
   const { index, style } = props;
   return (
     <div style={style}>
-      <TableRow el={data[index]} />
+      <TableRowVirt
+        el={data.rows[index]}
+        handleRowSelect={data.handleRowSelect}
+      />
     </div>
   );
 };
@@ -15,10 +20,13 @@ const Row = data => props => {
 const TableBodyVirt = props => {
   const { rows } = props;
   return (
-    <List height={800} itemCount={20} itemSize={35} width={1000}>
-      {Row(rows)}
-      {/* <TableRow itemData={rows} /> */}
-    </List>
+    <AutoSizer>
+      {({ width }) => (
+        <List height={900} itemCount={rows.length} itemSize={15} width={width}>
+          {Row(props)}
+        </List>
+      )}
+    </AutoSizer>
   );
 };
 
