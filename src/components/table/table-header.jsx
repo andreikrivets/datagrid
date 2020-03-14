@@ -1,20 +1,62 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
 import React from "react";
-import { TableHead, TableRow, TableCell } from "@material-ui/core";
+import Select from "react-select";
 
-const TableHeader = ({ handleSort }) => {
+import eData from "../../data/enum";
+
+// import { TableHead, TableRow, TableCell } from "@material-ui/core";
+
+const TableHeader = props => {
+  const { handleSort, handleBanksChange, onDelete } = props;
+  const enums = eData.map(el => ({ value: el, label: el.toLocaleLowerCase() }));
+
   return (
-    <TableHead>
-      <TableRow style={{ cursor: "pointer" }}>
-        <TableCell onClick={handleSort}>name</TableCell>
-        <TableCell onClick={handleSort}>zip code</TableCell>
-        <TableCell onClick={handleSort}>enum</TableCell>
-        <TableCell onClick={handleSort}>date</TableCell>
-        <TableCell onClick={handleSort}>date-2</TableCell>
-        <TableCell onClick={handleSort}>money</TableCell>
-        <TableCell onClick={handleSort}>ok</TableCell>
-      </TableRow>
-    </TableHead>
+    <thead style={{ fontWeight: "bolder" }}>
+      <tr style={{ cursor: "pointer" }}>
+        <td
+          id="id"
+          className="fixed"
+          style={{ display: "flex", flexDirection: "column" }}
+        >
+          <b>id</b>
+          <input
+            type="button"
+            style={{ width: "10px", height: "20px" }}
+            value="х"
+            onClick={() => onDelete()}
+          />
+        </td>
+        <td id="string" onClick={handleSort} className="fixed">
+          name
+        </td>
+        <td id="integer" onClick={handleSort} className="fixed">
+          zip code
+        </td>
+        <td id="enum" className="fixed" style={{ width: "300px" }}>
+          <Select
+            isMulti
+            noOptionsMessage={() => null}
+            options={enums}
+            placeholder="banks"
+            onChange={handleBanksChange}
+          />
+        </td>
+        <td id="localDate" onClick={handleSort} className="fixed">
+          date
+        </td>
+        <td id="instant" onClick={handleSort} className="fixed">
+          time
+        </td>
+        <td id="money" onClick={handleSort} className="fixed">
+          amount
+        </td>
+        <td id="bool" onClick={handleSort} className="fixed">
+          ok?
+        </td>
+      </tr>
+    </thead>
   );
 };
 

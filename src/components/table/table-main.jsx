@@ -10,7 +10,10 @@ import React, { useState } from "react";
 import Select from "react-select";
 import key from "weak-key";
 
-import eData from "../../data/enum";
+import TableLabel from "./table-label";
+import TableHeader from "./table-header";
+import TableBodyCl from "./table-body-cl";
+import TableBodyVirt from "./table-body-virt";
 
 import "./table-style.css";
 
@@ -30,17 +33,6 @@ const TableMain = props => {
     onSelect,
     onUnselect
   } = props;
-  const selectedRows = [];
-
-  const options = [
-    { value: "string", label: "name" },
-    { value: "integer", label: "zip" },
-    { value: "enum", label: "bank" }
-  ];
-
-  const [searchCol, setSearchCol] = useState(() => options.map(el => el.value));
-
-  const enums = eData.map(el => ({ value: el, label: el.toLocaleLowerCase() }));
 
   const handleSort = e => {
     const { classList } = e.target;
@@ -87,107 +79,27 @@ const TableMain = props => {
       onSelect(+innerText);
     }
   };
-
+  const v = 0;
   return (
     <div style={{ fontFamily: "monospace" }}>
-      <div style={{ display: "flex", justifyContent: "start" }}>
-        <input
-          type="text"
-          onKeyDown={e => onSearchChange(e.target.value, searchCol)}
-        />
-        <Select
-          isMulti
-          noOptionsMessage={() => null}
-          options={options}
-          defaultValue={options}
-          onChange={e => (e ? setSearchCol(() => e.map(el => el.value)) : e)}
-        />
-        <label htmlFor="boolean-toggle-ok">open</label>
-        <input
-          type="checkbox"
-          id="boolean-toggle-ok"
-          onChange={handleBooleanTogglerOk}
-          checked={okToggler}
-        />
-        <label htmlFor="boolean-toggle-error">close</label>
-        <input
-          type="checkbox"
-          id="boolean-toggle-error"
-          onChange={handleBooleanTogglerErr}
-          checked={errToggler}
-        />
-      </div>
+      <TableLabel
+        onSearchChange={onSearchChange}
+        handleBooleanTogglerOk={handleBooleanTogglerOk}
+        handleBooleanTogglerErr={handleBooleanTogglerErr}
+        okToggler={okToggler}
+        errToggler={errToggler}
+      />
       <table style={{ width: "100%" }}>
-        <thead style={{ fontWeight: "bolder" }}>
-          <tr style={{ cursor: "pointer" }}>
-            <td
-              id="id"
-              className="fixed"
-              style={{ display: "flex", flexDirection: "column" }}
-            >
-              <b>id</b>
-              <input
-                type="button"
-                style={{ width: "10px", height: "20px" }}
-                value="х"
-                onClick={() => onDelete(selectedRows)}
-              />
-            </td>
-            <td id="string" onClick={handleSort} className="fixed">
-              name
-            </td>
-            <td id="integer" onClick={handleSort} className="fixed">
-              zip code
-            </td>
-            <td id="enum" className="fixed" style={{ width: "300px" }}>
-              <Select
-                isMulti
-                noOptionsMessage={() => null}
-                options={enums}
-                placeholder="banks"
-                onChange={handleBanksChange}
-              />
-            </td>
-            <td id="localDate" onClick={handleSort} className="fixed">
-              date
-            </td>
-            <td id="instant" onClick={handleSort} className="fixed">
-              time
-            </td>
-            <td id="money" onClick={handleSort} className="fixed">
-              amount
-            </td>
-            <td id="bool" onClick={handleSort} className="fixed">
-              ok?
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map(el => {
-            const hours = new Date(el.instant * 1000).getHours().toString();
-            const minutes = new Date(el.instant * 1000).getMinutes().toString();
-            return (
-              <tr key={key(el)} onClick={handleRowSelect}>
-                <td className="first-col">{el.id}</td>
-                <td>{el.string}</td>
-                <td>{el.integer}</td>
-                <td>{el.enum}</td>
-                <td>{el.localDate.toLocaleDateString()}</td>
-                <td>
-                  <b>{hours.length === 1 ? `0${hours}` : hours}</b>
-                  <b>:</b>
-                  <b>{minutes.length === 1 ? `0${minutes}` : minutes}</b>
-                </td>
-                <td>
-                  <b>{`${el.object.money.currency}  `}</b>
-                  <b>{el.object.money.amount}</b>
-                </td>
-                <td>{el.bool ? "open" : "close"}</td>
-              </tr>
-            );
-          })}
-        </tbody>
+        <TableHeader
+          handleSort={handleSort}
+          handleBanksChange={handleBanksChange}
+          onDelete={onDelete}
+        />
+        {/* <tbody> */}
+        <TableBodyCl rows={rows} handleRowSelect={handleRowSelect} />
+        {/* </tbody> */}
       </table>
+      {/* <TableBodyVirt rows={rows} handleRowSelect={handleRowSelect} /> */}
     </div>
   );
 };
