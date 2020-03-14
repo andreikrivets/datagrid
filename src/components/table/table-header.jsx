@@ -10,8 +10,19 @@ import eData from "../../data/enum";
 // import { TableHead, TableRow, TableCell } from "@material-ui/core";
 
 const TableHeader = props => {
-  const { handleSort, handleBanksChange, onDelete } = props;
-  const enums = eData.map(el => ({ value: el, label: el.toLocaleLowerCase() }));
+  const { handleSort, handleBanksChange, onFilter } = props;
+  const enums = eData.map(el => ({ value: el, label: el }));
+
+  const status = [
+    { value: "open", label: "open" },
+    { value: "close", label: "close" }
+  ];
+
+  const handleStatusFilter = e => {
+    if (e && e.length === 1) {
+      onFilter(e[0].value);
+    } else onFilter(null);
+  };
 
   return (
     <div style={{ fontWeight: "bolder" }}>
@@ -19,23 +30,17 @@ const TableHeader = props => {
         style={{
           cursor: "pointer",
           display: "flex",
-          justifyContent: "space-around"
+          justifyContent: "space-around",
+          position: "sticky",
+          boxShadow:
+            "0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12)",
+          alignItems: "center"
         }}
       >
-        <div
-          id="id"
-          className="fixed first-col"
-          style={{ display: "flex", flexDirection: "column" }}
-        >
+        <div id="id" className="fixed first-col">
           <b>id</b>
-          <input
-            type="button"
-            style={{ width: "10px", height: "20px" }}
-            value="х"
-            onClick={() => onDelete()}
-          />
         </div>
-        <div id="sdiving" onClick={handleSort} className="fixed">
+        <div id="string" onClick={handleSort} className="fixed">
           name
         </div>
         <div id="integer" onClick={handleSort} className="fixed">
@@ -48,6 +53,16 @@ const TableHeader = props => {
             options={enums}
             placeholder="banks"
             onChange={handleBanksChange}
+            styles={{
+              control: provided => ({
+                ...provided,
+                marginRight: "10%"
+              }),
+              options: provided => ({
+                ...provided,
+                background: "white"
+              })
+            }}
           />
         </div>
         <div id="localDate" onClick={handleSort} className="fixed">
@@ -59,8 +74,14 @@ const TableHeader = props => {
         <div id="money" onClick={handleSort} className="fixed">
           amount
         </div>
-        <div id="bool" onClick={handleSort} className="fixed">
-          ok?
+        <div id="bool" className="fixed">
+          <Select
+            isMulti
+            noOptionsMessage={() => null}
+            options={status}
+            placeholder="status"
+            onChange={handleStatusFilter}
+          />
         </div>
       </div>
     </div>

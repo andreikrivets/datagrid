@@ -10,6 +10,16 @@ import React, { useState } from "react";
 import Select from "react-select";
 import key from "weak-key";
 
+import {
+  Table,
+  TableBody as TableBodyMU,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper
+} from "@material-ui/core/";
+
 import TableLabel from "./table-label";
 import TableHeader from "./table-header";
 import TableBodyCl from "./table-body-cl";
@@ -54,18 +64,6 @@ const TableMain = props => {
     if (variant) classList.add(variant);
   };
 
-  const handleBooleanTogglerOk = e => {
-    setErrToggler(false);
-    setOkToggler(prevOkToggler => !prevOkToggler);
-    onFilter(e.target.checked ? "open" : null);
-  };
-
-  const handleBooleanTogglerErr = e => {
-    setOkToggler(false);
-    setErrToggler(prevErrToggler => !prevErrToggler);
-    onFilter(e.target.checked ? "close" : null);
-  };
-
   const handleBanksChange = e =>
     onFilter(e ? e.map(el => el.value).join(" ") : null);
 
@@ -82,27 +80,24 @@ const TableMain = props => {
   };
 
   return (
-    <div style={{ fontFamily: "monospace" }}>
+    <div style={{ fontFamily: "'Baloo Thambi 2', cursive" }}>
       <TableLabel
         onSearchChange={onSearchChange}
-        handleBooleanTogglerOk={handleBooleanTogglerOk}
-        handleBooleanTogglerErr={handleBooleanTogglerErr}
-        okToggler={okToggler}
-        errToggler={errToggler}
         setIsVirtualised={setIsVirtualised}
+        onDelete={onDelete}
       />
-      <div>
+      <Paper elevation={3} className="table-main">
         <TableHeader
           handleSort={handleSort}
           handleBanksChange={handleBanksChange}
-          onDelete={onDelete}
+          onFilter={onFilter}
         />
-      </div>
-      {isVirtualized ? (
-        <TableBodyCl rows={rows} handleRowSelect={handleRowSelect} />
-      ) : (
-        <TableBodyVirt rows={rows} handleRowSelect={handleRowSelect} />
-      )}
+        {isVirtualized ? (
+          <TableBodyCl rows={rows} handleRowSelect={handleRowSelect} />
+        ) : (
+          <TableBodyVirt rows={rows} handleRowSelect={handleRowSelect} />
+        )}
+      </Paper>
     </div>
   );
 };

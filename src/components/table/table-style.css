@@ -18,7 +18,7 @@ thead {
     position: sticky;
     position: -webkit-sticky;
     top: 10px;
-    background-color: cyan;
+    background-color: lightcyan;
     width: 20%;
     z-index: 10;
 }
@@ -28,13 +28,70 @@ thead {
 }
 
 .selected-row {
-    background-color: cyan;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(240,247,255,1) 15%, rgba(255,255,255,0.9107843821122199) 50%, rgba(237,246,255,1) 85%, rgba(255,255,255,1) 100%);
     font-weight: bolder;
-    transition: all 0.2s cubic-bezier();
+    transition: all 0.5s ease;
+}
+
+.selected-row:hover {
+    background-color: cyan !important;
 }
 
 .first-col {
-    background: cyan;
+    background: lightcyan;
     cursor: pointer;
     width: 5%
+}
+
+.table-main {
+    margin: 10px 10px
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid cyan;
+    margin: 5px 0;
+    box-shadow: 1px 1px 2px rgb(226, 240, 245);
+    transition: all 0.5s ease;
+}
+
+.row:hover {
+    background-color: lightcyan;
+}
+
+#id {
+    text-align: left;
+}
+
+.first-col, .td-name, .td-zip {
+    text-align: left;
+}
+
+.td-banks {
+    margin: 5px
+}
+
+.td-status {
+    text-align: center;
+}
+
+.td-time, 
+.td-date, 
+.td-zip,
+#integer,
+#localDate, 
+#instant {
+    width: 10%;
+    text-align: cetner;
+}
+
+.td-name,
+#string {
+    width: 30%
+}
+
+#enum {
+    padding-right: 30px
 }

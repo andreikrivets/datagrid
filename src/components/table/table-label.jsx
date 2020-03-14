@@ -2,56 +2,59 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 import Select from "react-select";
+import { FormControlLabel, Switch, TextField } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
 
 const TableLabel = props => {
-  const {
-    onSearchChange,
-    handleBooleanTogglerOk,
-    handleBooleanTogglerErr,
-    okToggler,
-    errToggler,
-    setIsVirtualised
-  } = props;
-  const options = [
+  const { onSearchChange, setIsVirtualised, onDelete } = props;
+  const enumOptions = [
     { value: "string", label: "name" },
     { value: "integer", label: "zip" },
     { value: "enum", label: "bank" }
   ];
-  const [searchCol, setSearchCol] = useState(() => options.map(el => el.value));
+  const [searchCol, setSearchCol] = useState(() =>
+    enumOptions.map(el => el.value)
+  );
   return (
-    <div style={{ display: "flex", justifyContent: "start" }}>
-      <input
-        type="text"
-        onKeyDown={e => onSearchChange(e.target.value, searchCol)}
-      />
-      <Select
-        isMulti
-        noOptionsMessage={() => null}
-        options={options}
-        defaultValue={options}
-        onChange={e => (e ? setSearchCol(() => e.map(el => el.value)) : e)}
-      />
-      <label htmlFor="boolean-toggle-ok">open</label>
-      <input
-        type="checkbox"
-        id="boolean-toggle-ok"
-        onChange={handleBooleanTogglerOk}
-        checked={okToggler}
-      />
-      <label htmlFor="boolean-toggle-error">close</label>
-      <input
-        type="checkbox"
-        id="boolean-toggle-error"
-        onChange={handleBooleanTogglerErr}
-        checked={errToggler}
-      />
-      <label htmlFor="virtualization">virtualization</label>
-      <input
-        type="checkbox"
-        name="vitrualization"
-        id="virtualization"
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "baseline" }}>
+        <TextField
+          label="search"
+          onKeyDown={e => onSearchChange(e.target.value, searchCol)}
+        />
+        <Select
+          isMulti
+          noOptionsMessage={() => null}
+          options={enumOptions}
+          defaultValue={enumOptions}
+          onChange={e => (e ? setSearchCol(() => e.map(el => el.value)) : e)}
+          styles={{
+            control: provided => ({
+              ...provided,
+              border: "none",
+              width: "300px"
+            })
+          }}
+        />
+      </div>
+      <FormControlLabel
+        value="virtualization"
+        control={<Switch color="primary" />}
+        label="virtualization"
+        labelPlacement="top"
         onChange={() => setIsVirtualised(prev => !prev)}
       />
+      <IconButton size="small" onClick={() => onDelete()}>
+        <span role="img" aria-label="wastebasket">
+          🗑️
+        </span>
+      </IconButton>
     </div>
   );
 };

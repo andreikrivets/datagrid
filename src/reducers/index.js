@@ -18,7 +18,7 @@ const information = (state = defaultDataState, action) => {
       return { ...state, data: action.data, loading: true };
     case "DELETE_ROW": {
       const badSolve = data => {
-        if (!state.selected) return data;
+        if (!state.selected.length) return data;
         const array = state.selected.map(e => data.map(el => el.id === e));
         const concatArr = array[0].map((el, i) => {
           let element = false;
