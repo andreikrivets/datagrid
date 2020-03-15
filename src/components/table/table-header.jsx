@@ -1,18 +1,11 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React from "react";
 import Select from "react-select";
-import uniquid from 'uniquid';
+import uniqid from "uniqid";
 
-import { Button } from '@material-ui/core'
+import { Button } from "@material-ui/core";
 
 import eData from "../../data/enum";
-
-// import { TableHead, TableRow, TableCell } from "@material-ui/core";
 
 const TableHeader = props => {
   const {
@@ -23,7 +16,16 @@ const TableHeader = props => {
     setVisiblity
   } = props;
   const enums = eData.map(el => ({ value: el, label: el }));
-  const buttons = ["id", "name", "zip", "bank", "date", "time", "amount", "status"];
+  const buttons = [
+    "id",
+    "name",
+    "zip",
+    "bank",
+    "date",
+    "time",
+    "amount",
+    "status"
+  ];
   const status = [
     { value: "open", label: "open" },
     { value: "close", label: "close" }
@@ -41,9 +43,10 @@ const TableHeader = props => {
         {buttons.map(el => {
           return (
             <Button
-              size="small" 
-              key={uniquid()}
-              onClick={() =>
+              size="small"
+              key={uniqid()}
+              onMouseDown={() =>
+                // eslint-disable-next-line prettier/prettier
                 setVisiblity({ ...visiblity, [el]: !visiblity[el] })}
               className={visiblity[el] ? "active" : "passive"}
             >
@@ -71,14 +74,18 @@ const TableHeader = props => {
         </div>
         <div
           id="string"
-          onClick={handleSort}
+          role="tab"
+          tabIndex="0"
+          onMouseDown={handleSort}
           className={`fixed ${visiblity.name ? "visible" : "hidden"}`}
         >
           name
         </div>
         <div
           id="integer"
-          onClick={handleSort}
+          role="tab"
+          tabIndex="0"
+          onMouseDown={handleSort}
           className={`fixed ${visiblity.zip ? "visible" : "hidden"}`}
         >
           zip code
@@ -93,32 +100,38 @@ const TableHeader = props => {
             options={enums}
             placeholder="banks"
             onChange={handleBanksChange}
-            menuPortalTarget={document.querySelector('body')}
+            menuPortalTarget={document.querySelector("body")}
             styles={{
               control: provided => ({
                 ...provided,
                 border: "none"
-              }),
+              })
             }}
           />
         </div>
         <div
           id="localDate"
-          onClick={handleSort}
+          role="tab"
+          tabIndex="0"
+          onMouseDown={handleSort}
           className={`fixed ${visiblity.date ? "visible" : "hidden"}`}
         >
           date
         </div>
         <div
           id="instant"
-          onClick={handleSort}
+          role="tab"
+          tabIndex="0"
+          onMouseDown={handleSort}
           className={`fixed ${visiblity.time ? "visible" : "hidden"}`}
         >
           time
         </div>
         <div
           id="money"
-          onClick={handleSort}
+          role="tab"
+          tabIndex="0"
+          onMouseDown={handleSort}
           className={`fixed ${visiblity.amount ? "visible" : "hidden"}`}
         >
           amount
@@ -133,12 +146,12 @@ const TableHeader = props => {
             options={status}
             placeholder="status"
             onChange={handleStatusFilter}
-            menuPortalTarget={document.querySelector('body')}
+            menuPortalTarget={document.querySelector("body")}
             styles={{
               control: provided => ({
                 ...provided,
                 border: "none"
-              }),
+              })
             }}
           />
         </div>

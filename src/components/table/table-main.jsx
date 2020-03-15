@@ -1,24 +1,7 @@
-/* eslint-disable react/jsx-curly-brace-presence */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/jsx-curly-newline */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
-import Select from "react-select";
-import key from "weak-key";
+import PropTypes from "prop-types";
 
-import {
-  Table,
-  TableBody as TableBodyMU,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper
-} from "@material-ui/core/";
+import { Paper } from "@material-ui/core/";
 
 import TableLabel from "./table-label";
 import TableHeader from "./table-header";
@@ -29,8 +12,6 @@ import "./table-style.css";
 
 const TableMain = props => {
   const [prevSelected, setPrevSelected] = useState("");
-  const [okToggler, setOkToggler] = useState(false);
-  const [errToggler, setErrToggler] = useState(false);
   const [num, setNum] = useState(0);
   const [isVirtualized, setIsVirtualised] = useState(true);
   const [visiblity, setVisiblity] = useState({
@@ -45,8 +26,6 @@ const TableMain = props => {
   });
   const {
     rows,
-    loading,
-    sort,
     onSort,
     onSearchChange,
     onFilter,
@@ -56,8 +35,12 @@ const TableMain = props => {
   } = props;
 
   const handleSort = e => {
+    let variant = ["asc", "desc", null][num];
+    if (prevSelected !== e.target) {
+      variant = "asc";
+      setNum(0);
+    }
     const { classList } = e.target;
-    const variant = ["asc", "desc", null][num];
     const column = e.target.id;
     onSort(column, variant);
 
@@ -70,23 +53,28 @@ const TableMain = props => {
 
     clearPreviousSelected();
     setPrevSelected(e.target);
-    setNum(prevNum => (prevNum === 2 ? 0 : num + 1));
+    setNum(prevNum => (prevNum >= 2 ? 0 : prevNum + 1));
     if (variant) classList.add(variant);
   };
 
   const handleBanksChange = e =>
     onFilter(e ? e.map(el => el.value).join(" ") : null);
 
-  const handleRowSelect = e => {
-    const { innerText } = e.target.parentNode.childNodes[0];
-    const { classList } = e.target.parentNode;
-    if (classList.contains("selected-row")) {
-      classList.remove("selected-row");
-      onUnselect(+innerText);
-    } else {
-      classList.add("selected-row");
-      onSelect(+innerText);
-    }
+  const handleRowSelect = el => {
+    const handle = e => {
+      const { innerText } = e.childNodes[0];
+      const { classList } = e;
+      if (classList.contains("selected-row")) {
+        classList.remove("selected-row");
+        onUnselect(+innerText);
+      } else {
+        classList.add("selected-row");
+        onSelect(+innerText);
+      }
+    };
+    if (el.target.parentNode.classList.contains("row"))
+      handle(el.target.parentNode);
+    else if (el.childNodes) handle(el);
   };
 
   return (
@@ -120,6 +108,16 @@ const TableMain = props => {
       </Paper>
     </div>
   );
+};
+
+TableMain.propTypes = {
+  rows: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onSort: PropTypes.func.isRequired,
+  onSearchChange: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  onUnselect: PropTypes.func.isRequired
 };
 
 export default TableMain;

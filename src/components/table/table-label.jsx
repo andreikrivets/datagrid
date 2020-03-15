@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Select from "react-select";
 import { FormControlLabel, Switch, TextField } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
@@ -57,6 +56,12 @@ const TableLabel = props => {
       </IconButton>
     </div>
   );
+};
+
+TableLabel.propTypes = {
+  onSearchChange: PropTypes.func.isRequired,
+  setIsVirtualised: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
 };
 
 export default TableLabel;

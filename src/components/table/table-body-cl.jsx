@@ -3,8 +3,6 @@ import React from "react";
 import key from "weak-key";
 
 import TableRow from "./table-row";
-// import uniquid from "uniquid";
-// import { TableRow, TableCell } from "@material-ui/core";
 
 const TableBodyCl = ({ rows, handleRowSelect, visiblity }) => {
   const { clientWidth } = document.body;

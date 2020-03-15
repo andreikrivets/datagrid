@@ -23,7 +23,7 @@ const TableBodyVirt = props => {
   return (
     <AutoSizer>
       {({ width }) => (
-        <List height={800} itemCount={rows.length} itemSize={45} width={width}>
+        <List height={800} itemCount={rows.length} itemSize={32} width={width}>
           {Row(props)}
         </List>
       )}

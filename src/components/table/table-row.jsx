@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React from "react";
 import key from "weak-key";
@@ -14,7 +11,9 @@ const TableRow = props => {
     <CardActionArea>
       <div
         key={key(el)}
-        onClick={handleRowSelect}
+        role="tab"
+        tabIndex="0"
+        onMouseDown={handleRowSelect}
         style={{
           display: "flex",
           justifyContent: "space-around",

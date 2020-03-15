@@ -1,4 +1,4 @@
-body {
+body, .main {
     font-family: 'Baloo Thambi 2', cursive;
 }
 
@@ -32,10 +32,6 @@ body {
     font-weight: bolder;
     transition: all 0.5s ease;
 }
-/* 
-.selected-row:hover {
-    background-color: cyan !important;
-} */
 
 .first-col {
     background: lightcyan;
@@ -48,11 +44,12 @@ body {
 }
 
 .row {
+    font-family: 'Baloo Thambi 2', cursive;
     display: flex;
     justify-content: space-around;
     border: 1px solid cyan;
-    margin: 5px 0;
-    box-shadow: 1px 1px 2px rgb(226, 240, 245);
+    /* padding: 5px 0; */
+    /* box-shadow: 1px 1px 2px rgb(226, 240, 245); */
     align-items: center;
     transition: all 0.5s ease;
 }
@@ -101,13 +98,14 @@ body {
 }
 
 .active {
-    color: lightskyblue !important;
+    color: skyblue !important;
     text-transform: none !important
 }
 
 .passive {
-    color: cyan !important;
-    text-transform: none !important
+    color: lightpink !important;
+    text-transform: none !important;
+    text-decoration: line-through !important;
 }
 
 .cols-vis {
