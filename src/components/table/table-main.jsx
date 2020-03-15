@@ -33,6 +33,16 @@ const TableMain = props => {
   const [errToggler, setErrToggler] = useState(false);
   const [num, setNum] = useState(0);
   const [isVirtualized, setIsVirtualised] = useState(true);
+  const [visiblity, setVisiblity] = useState({
+    id: true,
+    name: true,
+    zip: true,
+    bank: true,
+    date: true,
+    time: true,
+    amount: true,
+    status: true
+  });
   const {
     rows,
     loading,
@@ -80,7 +90,7 @@ const TableMain = props => {
   };
 
   return (
-    <div style={{ fontFamily: "'Baloo Thambi 2', cursive" }}>
+    <div className="main">
       <TableLabel
         onSearchChange={onSearchChange}
         setIsVirtualised={setIsVirtualised}
@@ -91,11 +101,21 @@ const TableMain = props => {
           handleSort={handleSort}
           handleBanksChange={handleBanksChange}
           onFilter={onFilter}
+          visiblity={visiblity}
+          setVisiblity={setVisiblity}
         />
         {isVirtualized ? (
-          <TableBodyCl rows={rows} handleRowSelect={handleRowSelect} />
+          <TableBodyCl
+            rows={rows}
+            handleRowSelect={handleRowSelect}
+            visiblity={visiblity}
+          />
         ) : (
-          <TableBodyVirt rows={rows} handleRowSelect={handleRowSelect} />
+          <TableBodyVirt
+            rows={rows}
+            handleRowSelect={handleRowSelect}
+            visiblity={visiblity}
+          />
         )}
       </Paper>
     </div>

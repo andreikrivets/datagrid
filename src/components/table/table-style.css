@@ -1,5 +1,5 @@
-thead {
-    cursor: pointer;
+body {
+    font-family: 'Baloo Thambi 2', cursive;
 }
 
 .selected-row-asc {
@@ -20,7 +20,6 @@ thead {
     top: 10px;
     background-color: lightcyan;
     width: 20%;
-    z-index: 10;
 }
 
 .row-el {
@@ -33,10 +32,10 @@ thead {
     font-weight: bolder;
     transition: all 0.5s ease;
 }
-
+/* 
 .selected-row:hover {
     background-color: cyan !important;
-}
+} */
 
 .first-col {
     background: lightcyan;
@@ -54,18 +53,15 @@ thead {
     border: 1px solid cyan;
     margin: 5px 0;
     box-shadow: 1px 1px 2px rgb(226, 240, 245);
+    align-items: center;
     transition: all 0.5s ease;
 }
 
-.row:hover {
-    background-color: lightcyan;
+#id, .first-col {
+    text-align: center
 }
 
-#id {
-    text-align: left;
-}
-
-.first-col, .td-name, .td-zip {
+.td-name, .td-zip {
     text-align: left;
 }
 
@@ -94,4 +90,29 @@ thead {
 
 #enum {
     padding-right: 30px
+}
+
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.active {
+    color: lightskyblue !important;
+    text-transform: none !important
+}
+
+.passive {
+    color: cyan !important;
+    text-transform: none !important
+}
+
+.cols-vis {
+    display: flex;
+    justify-content: space-evenly;
+    color: lightskyblue;
+    cursor: pointer;
 }

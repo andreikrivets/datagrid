@@ -9,7 +9,11 @@ const Row = data => props => {
   const { index, style } = props;
   return (
     <div style={style}>
-      <TableRow el={data.rows[index]} handleRowSelect={data.handleRowSelect} />
+      <TableRow
+        el={data.rows[index]}
+        handleRowSelect={data.handleRowSelect}
+        visiblity={data.visiblity}
+      />
     </div>
   );
 };

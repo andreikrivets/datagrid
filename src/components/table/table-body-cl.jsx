@@ -6,7 +6,7 @@ import TableRow from "./table-row";
 // import uniquid from "uniquid";
 // import { TableRow, TableCell } from "@material-ui/core";
 
-const TableBodyCl = ({ rows, handleRowSelect }) => {
+const TableBodyCl = ({ rows, handleRowSelect, visiblity }) => {
   const { clientWidth } = document.body;
   return (
     <div
@@ -19,7 +19,12 @@ const TableBodyCl = ({ rows, handleRowSelect }) => {
     >
       {rows.map(el => {
         return (
-          <TableRow el={el} key={key(el)} handleRowSelect={handleRowSelect} />
+          <TableRow
+            el={el}
+            key={key(el)}
+            visiblity={visiblity}
+            handleRowSelect={handleRowSelect}
+          />
         );
       })}
     </div>
