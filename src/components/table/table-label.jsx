@@ -18,10 +18,15 @@ const TableLabel = props => {
     <div
       style={{
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "space-around",
         alignItems: "center"
       }}
     >
+      <h1>
+        <a style={{ textDecoration: "none", color: "#FFCF9E" }} href="./">
+          D A T A G R I D
+        </a>
+      </h1>
       <div style={{ display: "flex", alignItems: "baseline" }}>
         <TextField
           label="search"
