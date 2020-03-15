@@ -12,7 +12,7 @@ import {
 import rowsSelector from "../../store/selectors";
 
 const mapStateToProps = state => {
-  const { search, sort, filter, row } = state.table;
+  const { search, sort, filter } = state.table;
   return {
     data: state.information.data,
     loading: state.information.loading,
@@ -20,7 +20,7 @@ const mapStateToProps = state => {
     sort,
     filter,
     rows: rowsSelector(state),
-    row
+    selected: state.information.selected
   };
 };
 

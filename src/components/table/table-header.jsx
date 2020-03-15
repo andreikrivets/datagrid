@@ -63,7 +63,8 @@ const TableHeader = props => {
           position: "sticky",
           boxShadow:
             "0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12)",
-          alignItems: "center"
+          alignItems: "center",
+          paddingRight: "15px"
         }}
       >
         <div
@@ -104,7 +105,8 @@ const TableHeader = props => {
             styles={{
               control: provided => ({
                 ...provided,
-                border: "none"
+                border: "none",
+                paddingRight: "10%"
               })
             }}
           />

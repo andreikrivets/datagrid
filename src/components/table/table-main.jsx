@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
@@ -31,7 +32,8 @@ const TableMain = props => {
     onFilter,
     onDelete,
     onSelect,
-    onUnselect
+    onUnselect,
+    selected
   } = props;
 
   const handleSort = e => {
@@ -60,21 +62,19 @@ const TableMain = props => {
   const handleBanksChange = e =>
     onFilter(e ? e.map(el => el.value).join(" ") : null);
 
-  const handleRowSelect = el => {
-    const handle = e => {
-      const { innerText } = e.childNodes[0];
-      const { classList } = e;
-      if (classList.contains("selected-row")) {
-        classList.remove("selected-row");
-        onUnselect(+innerText);
-      } else {
-        classList.add("selected-row");
-        onSelect(+innerText);
-      }
-    };
-    if (el.target.parentNode.classList.contains("row"))
-      handle(el.target.parentNode);
-    else if (el.childNodes) handle(el);
+  const handleRowSelect = e => {
+    console.log(e.target.parentNode);
+    // const {
+    //   innerText
+    // } = e.target.parentNode.parentNode.childNodes[0].firstChild;
+    // const { classList } = e.target.parentNode;
+    // if (classList.contains("selected-row")) {
+    //   classList.remove("selected-row");
+    //   onUnselect(+innerText);
+    // } else {
+    //   classList.add("selected-row");
+    //   onSelect(+innerText);
+    // }
   };
 
   return (
@@ -83,6 +83,7 @@ const TableMain = props => {
         onSearchChange={onSearchChange}
         setIsVirtualised={setIsVirtualised}
         onDelete={onDelete}
+        selected={selected}
       />
       <Paper elevation={3} className="table-main">
         <TableHeader
@@ -117,7 +118,8 @@ TableMain.propTypes = {
   onFilter: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired,
-  onUnselect: PropTypes.func.isRequired
+  onUnselect: PropTypes.func.isRequired,
+  selected: PropTypes.arrayOf(PropTypes.number).isRequired
 };
 
 export default TableMain;

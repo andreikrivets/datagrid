@@ -5,7 +5,7 @@ import { FormControlLabel, Switch, TextField } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 
 const TableLabel = props => {
-  const { onSearchChange, setIsVirtualised, onDelete } = props;
+  const { onSearchChange, setIsVirtualised, onDelete, selected } = props;
   const enumOptions = [
     { value: "string", label: "name" },
     { value: "integer", label: "zip" },
@@ -54,7 +54,11 @@ const TableLabel = props => {
         labelPlacement="top"
         onChange={() => setIsVirtualised(prev => !prev)}
       />
-      <IconButton size="small" onClick={() => onDelete()}>
+      <IconButton
+        size="small"
+        disabled={!selected.length}
+        onClick={() => onDelete()}
+      >
         <span role="img" aria-label="wastebasket">
           🗑️
         </span>
@@ -66,7 +70,8 @@ const TableLabel = props => {
 TableLabel.propTypes = {
   onSearchChange: PropTypes.func.isRequired,
   setIsVirtualised: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired,
+  selected: PropTypes.arrayOf(PropTypes.number).isRequired
 };
 
 export default TableLabel;
