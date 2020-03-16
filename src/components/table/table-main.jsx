@@ -8,6 +8,8 @@ import TableHeader from "./table-header";
 import TableBodyCl from "./table-body-cl";
 import TableBodyVirt from "./table-body-virt";
 
+import exportToCsv from "../../utils/exportToCsv";
+
 import "./table-style.css";
 
 const TableMain = props => {
@@ -64,9 +66,7 @@ const TableMain = props => {
   const handleRowSelect = e => {
     if (e.target.className === "first-col  visible") {
       const { innerText } = e.target;
-      // select
       onSelect(+innerText);
-      // unselect
       if (selected.filter(el => +el === +innerText).length)
         onUnselect(+innerText);
     }
@@ -79,6 +79,7 @@ const TableMain = props => {
         setIsVirtualised={setIsVirtualised}
         onDelete={onDelete}
         selected={selected}
+        saveTable={() => exportToCsv(rows)}
       />
       <Paper elevation={3} className="table-main">
         <TableHeader

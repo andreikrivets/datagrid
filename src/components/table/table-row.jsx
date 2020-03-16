@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import key from "weak-key";
 
 const TableRow = props => {
@@ -12,6 +11,8 @@ const TableRow = props => {
       <div
         key={key(el)}
         onMouseDown={handleRowSelect}
+        role="row"
+        aria-hidden="true"
         className={`row ${isSelect ? "selected-row" : "unselected-row"}`}
       >
         <div className={`first-col  ${visiblity.id ? "visible" : "hidden"}`}>
@@ -60,6 +61,13 @@ const TableRow = props => {
       </div>
     </div>
   );
+};
+
+TableRow.propTypes = {
+  el: PropTypes.shape().isRequired,
+  handleRowSelect: PropTypes.func.isRequired,
+  visiblity: PropTypes.shape().isRequired,
+  isSelect: PropTypes.bool.isRequired
 };
 
 export default TableRow;

@@ -22,7 +22,6 @@ body, .main {
     position: sticky;
     position: -webkit-sticky;
     top: 10px;
-    background-color: lightcyan;
     width: 20%;
 }
 
