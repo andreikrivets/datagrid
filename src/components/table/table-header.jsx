@@ -78,18 +78,12 @@ const TableHeader = props => {
         </div>
         <div
           id="instant"
-          role="tab"
-          tabIndex="0"
-          onMouseDown={handleSort}
           className={`fixed ${visiblity.time ? "visible" : "hidden"}`}
         >
           time
         </div>
         <div
           id="money"
-          role="tab"
-          tabIndex="0"
-          onMouseDown={handleSort}
           className={`fixed ${visiblity.amount ? "visible" : "hidden"}`}
         >
           amount
