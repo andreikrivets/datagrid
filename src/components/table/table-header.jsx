@@ -36,7 +36,7 @@ const TableHeader = props => {
           style={{ background: "white" }}
           className={`fixed fxd ${visiblity.name ? "visible" : "hidden"}`}
         >
-          <span className="name-p">name</span>
+          name
         </div>
         <div
           id="integer"

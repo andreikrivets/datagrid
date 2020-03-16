@@ -10,11 +10,11 @@ body, .main {
     background-color: blue;
 }
 
-.asc:after {
+.desc:after {
     content: " ↑"
 }
 
-.desc:after {
+.asc:after {
     content: " ↓"
 }
 
@@ -36,7 +36,6 @@ body, .main {
     top: 0px;
     background: white;
     width: 1480px;
-    z-index: 15;
     border-bottom: 2px solid rgb(255, 207, 158);
 }
 
@@ -147,4 +146,5 @@ body, .main {
     padding: 0 0;
     margin: 0 0;
     background: white;
+    padding-right: 20px
 }

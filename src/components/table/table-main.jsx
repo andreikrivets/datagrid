@@ -104,7 +104,11 @@ const TableMain = props => {
               rows={rows}
               selected={selected}
               visiblity={visiblity}
+              setVisiblity={setVisiblity}
               handleRowSelect={handleRowSelect}
+              handleSort={handleSort}
+              handleBanksChange={handleBanksChange}
+              onFilter={onFilter}
             />
           )}
         </Paper>
