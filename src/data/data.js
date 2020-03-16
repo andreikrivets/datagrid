@@ -29,7 +29,7 @@ const fetchData = () => {
     };
   };
 
-  return [...new Array(25)].map(() => {
+  return [...new Array(1000)].map(() => {
     i += 1;
     return makeData();
   });
