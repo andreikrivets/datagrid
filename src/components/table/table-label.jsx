@@ -42,7 +42,7 @@ const TableLabel = props => {
       <div style={{ display: "flex", alignItems: "baseline" }}>
         <TextField
           label="search"
-          onKeyDown={e => onSearchChange(e.target.value, searchCol)}
+          onKeyUp={e => onSearchChange(e.target.value, searchCol)}
         />
         <Select
           isMulti
