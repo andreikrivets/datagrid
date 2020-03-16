@@ -4,7 +4,7 @@ import React from "react";
 import key from "weak-key";
 
 const TableRow = props => {
-  const { el, handleRowSelect, visiblity } = props;
+  const { el, handleRowSelect, visiblity, isSelect } = props;
   const hours = new Date(el.instant * 1000).getHours().toString();
   const minutes = new Date(el.instant * 1000).getMinutes().toString();
   return (
@@ -12,8 +12,7 @@ const TableRow = props => {
       <div
         key={key(el)}
         onMouseDown={handleRowSelect}
-        style={{ display: "flex" }}
-        className="row"
+        className={`row ${isSelect ? "selected-row" : "unselected-row"}`}
       >
         <div className={`first-col  ${visiblity.id ? "visible" : "hidden"}`}>
           {el.id}

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
@@ -63,14 +62,13 @@ const TableMain = props => {
     onFilter(e ? e.map(el => el.value).join(" ") : null);
 
   const handleRowSelect = e => {
-    const { innerText } = e.target.firstChild;
-    const { classList } = e.target.parentNode;
-    if (classList.contains("selected-row")) {
-      classList.remove("selected-row");
-      onUnselect(+innerText);
-    } else {
-      classList.add("selected-row");
+    if (e.target.className === "first-col  visible") {
+      const { innerText } = e.target;
+      // select
       onSelect(+innerText);
+      // unselect
+      if (selected.filter(el => +el === +innerText).length)
+        onUnselect(+innerText);
     }
   };
 
@@ -93,14 +91,16 @@ const TableMain = props => {
         {isVirtualized ? (
           <TableBodyCl
             rows={rows}
-            handleRowSelect={handleRowSelect}
+            selected={selected}
             visiblity={visiblity}
+            handleRowSelect={handleRowSelect}
           />
         ) : (
           <TableBodyVirt
             rows={rows}
-            handleRowSelect={handleRowSelect}
+            selected={selected}
             visiblity={visiblity}
+            handleRowSelect={handleRowSelect}
           />
         )}
       </Paper>

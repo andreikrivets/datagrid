@@ -1,10 +1,10 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import key from "weak-key";
 
 import TableRow from "./table-row";
 
-const TableBodyCl = ({ rows, handleRowSelect, visiblity }) => {
+const TableBodyCl = ({ rows, handleRowSelect, visiblity, selected }) => {
   const { clientWidth } = document.body;
   return (
     <div
@@ -22,11 +22,19 @@ const TableBodyCl = ({ rows, handleRowSelect, visiblity }) => {
             key={key(el)}
             visiblity={visiblity}
             handleRowSelect={handleRowSelect}
+            isSelect={!!selected.filter(element => element === el.id).length}
           />
         );
       })}
     </div>
   );
+};
+
+TableBodyCl.propTypes = {
+  rows: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleRowSelect: PropTypes.func.isRequired,
+  visiblity: PropTypes.shape().isRequired,
+  selected: PropTypes.arrayOf(PropTypes.number).isRequired
 };
 
 export default TableBodyCl;

@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import { FixedSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 
@@ -13,6 +13,10 @@ const Row = data => props => {
         el={data.rows[index]}
         handleRowSelect={data.handleRowSelect}
         visiblity={data.visiblity}
+        isSelect={
+          !!data.selected.filter(element => element === data.rows[index].id)
+            .length
+        }
       />
     </div>
   );
@@ -29,6 +33,10 @@ const TableBodyVirt = props => {
       )}
     </AutoSizer>
   );
+};
+
+TableBodyVirt.propTypes = {
+  rows: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default TableBodyVirt;

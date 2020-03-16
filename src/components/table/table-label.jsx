@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
-import { FormControlLabel, Switch, TextField } from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
+import {
+  FormControlLabel,
+  Switch,
+  TextField,
+  IconButton
+} from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const TableLabel = props => {
   const { onSearchChange, setIsVirtualised, onDelete, selected } = props;
@@ -55,13 +60,17 @@ const TableLabel = props => {
         onChange={() => setIsVirtualised(prev => !prev)}
       />
       <IconButton
-        size="small"
+        size="medium"
         disabled={!selected.length}
         onClick={() => onDelete()}
+        style={{
+          position: "absolute",
+          zIndex: "20",
+          bottom: "50px",
+          right: "50px"
+        }}
       >
-        <span role="img" aria-label="wastebasket">
-          🗑️
-        </span>
+        <DeleteIcon />
       </IconButton>
     </div>
   );
