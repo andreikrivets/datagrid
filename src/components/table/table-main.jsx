@@ -63,18 +63,15 @@ const TableMain = props => {
     onFilter(e ? e.map(el => el.value).join(" ") : null);
 
   const handleRowSelect = e => {
-    console.log(e.target.parentNode);
-    // const {
-    //   innerText
-    // } = e.target.parentNode.parentNode.childNodes[0].firstChild;
-    // const { classList } = e.target.parentNode;
-    // if (classList.contains("selected-row")) {
-    //   classList.remove("selected-row");
-    //   onUnselect(+innerText);
-    // } else {
-    //   classList.add("selected-row");
-    //   onSelect(+innerText);
-    // }
+    const { innerText } = e.target.firstChild;
+    const { classList } = e.target.parentNode;
+    if (classList.contains("selected-row")) {
+      classList.remove("selected-row");
+      onUnselect(+innerText);
+    } else {
+      classList.add("selected-row");
+      onSelect(+innerText);
+    }
   };
 
   return (

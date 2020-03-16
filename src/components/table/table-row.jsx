@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import key from "weak-key";
-import { Typography } from "@material-ui/core";
 
 const TableRow = props => {
   const { el, handleRowSelect, visiblity } = props;
@@ -16,51 +15,49 @@ const TableRow = props => {
         style={{ display: "flex" }}
         className="row"
       >
-        <Typography
-          className={`first-col  ${visiblity.id ? "visible" : "hidden"}`}
-        >
+        <div className={`first-col  ${visiblity.id ? "visible" : "hidden"}`}>
           {el.id}
-        </Typography>
-        <Typography
+        </div>
+        <div
           className={`row-el td-name  ${visiblity.name ? "visible" : "hidden"}`}
         >
           {el.string}
-        </Typography>
-        <Typography
+        </div>
+        <div
           className={`row-el td-zip  ${visiblity.zip ? "visible" : "hidden"}`}
         >
           {el.integer}
-        </Typography>
-        <Typography
+        </div>
+        <div
           className={`row-el td-banks ${visiblity.bank ? "visible" : "hidden"}`}
         >
           {el.enum}
-        </Typography>
-        <Typography
+        </div>
+        <div
           className={`row-el td-date ${visiblity.date ? "visible" : "hidden"}`}
         >
           {el.localDate.toLocaleDateString()}
-        </Typography>
-        <Typography
+        </div>
+        <div
           className={`row-el td-time  ${visiblity.time ? "visible" : "hidden"}`}
         >
           {hours.length === 1 ? `0${hours}:` : `${hours}:`}
           {minutes.length === 1 ? `0${minutes}` : minutes}
-        </Typography>
-        <Typography
+        </div>
+        <div
           className={`row-el td-amount  ${
             visiblity.amount ? "visible" : "hidden"
           }`}
         >
           {`${el.object.money.currency}  ${el.object.money.amount}`}
-        </Typography>
-        <Typography
+        </div>
+        <div
           className={`row-el td-status ${
             visiblity.status ? "visible" : "hidden"
           }`}
         >
           {el.bool ? "open" : "close"}
-        </Typography>
+        </div>
       </div>
     </div>
   );
