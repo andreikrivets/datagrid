@@ -19,9 +19,11 @@ const TableRow = props => {
           {el.id}
         </div>
         <div
-          className={`row-el td-name  ${visiblity.name ? "visible" : "hidden"}`}
+          className={`row-el fxd td-name  ${
+            visiblity.name ? "visible" : "hidden"
+          }`}
         >
-          {el.string}
+          <span className="name-p">{el.string}</span>
         </div>
         <div
           className={`row-el td-zip  ${visiblity.zip ? "visible" : "hidden"}`}

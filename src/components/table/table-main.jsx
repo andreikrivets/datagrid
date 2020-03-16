@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import { Paper } from "@material-ui/core/";
 
 import TableLabel from "./table-label";
-import TableHeader from "./table-header";
 import TableBodyCl from "./table-body-cl";
 import TableBodyVirt from "./table-body-virt";
+import TableColSelect from "./table-header-col-select";
 
 import exportToCsv from "../../utils/exportToCsv";
 
@@ -81,30 +81,34 @@ const TableMain = props => {
         selected={selected}
         saveTable={() => exportToCsv(rows)}
       />
-      <Paper elevation={3} className="table-main">
-        <TableHeader
-          handleSort={handleSort}
-          handleBanksChange={handleBanksChange}
-          onFilter={onFilter}
-          visiblity={visiblity}
-          setVisiblity={setVisiblity}
-        />
-        {isVirtualized ? (
-          <TableBodyCl
-            rows={rows}
-            selected={selected}
-            visiblity={visiblity}
-            handleRowSelect={handleRowSelect}
-          />
-        ) : (
-          <TableBodyVirt
-            rows={rows}
-            selected={selected}
-            visiblity={visiblity}
-            handleRowSelect={handleRowSelect}
-          />
-        )}
-      </Paper>
+      <div style={{ display: "block" }}>
+        <Paper
+          elevation={3}
+          className="table-main"
+          style={{ maxWidth: "1500px", margin: "0 auto" }}
+        >
+          <TableColSelect visiblity={visiblity} setVisiblity={setVisiblity} />
+          {isVirtualized ? (
+            <TableBodyCl
+              rows={rows}
+              selected={selected}
+              visiblity={visiblity}
+              setVisiblity={setVisiblity}
+              handleRowSelect={handleRowSelect}
+              handleSort={handleSort}
+              handleBanksChange={handleBanksChange}
+              onFilter={onFilter}
+            />
+          ) : (
+            <TableBodyVirt
+              rows={rows}
+              selected={selected}
+              visiblity={visiblity}
+              handleRowSelect={handleRowSelect}
+            />
+          )}
+        </Paper>
+      </div>
     </div>
   );
 };

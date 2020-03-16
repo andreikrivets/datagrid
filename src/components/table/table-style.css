@@ -25,14 +25,26 @@ body, .main {
     width: 20%;
 }
 
+.fxd {
+    position: sticky;
+    left: 10px;
+}
+
+.table-header-wrap {
+    font-weight: bold;
+    position: sticky;
+    top: 0px;
+    background: white;
+    width: 1480px;
+    z-index: 15;
+    border-bottom: 2px solid rgb(255, 207, 158);
+}
+
 .table-header {
     cursor: pointer;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-right: 15px;
-    position: sticky;
-    box-shadow: 0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12)
 }
 
 .row-el {
@@ -57,14 +69,12 @@ body, .main {
 }
 
 .row {
-    /* font-family: 'Baloo Thambi 2', cursive; */
     display: flex;
     justify-content: space-around;
-    border: 1px solid cyan;
-    /* padding: 5px 0; */
-    /* box-shadow: 1px 1px 2px rgb(226, 240, 245); */
+    border: 1px solid rgb(252, 228, 205);
     align-items: center;
     transition: all 0.5s ease;
+    width: 1480px
 }
 
 .unselected-row {
@@ -131,4 +141,10 @@ body, .main {
     justify-content: space-evenly;
     color: lightskyblue;
     cursor: pointer;
+}
+
+.name-p {
+    padding: 0 0;
+    margin: 0 0;
+    background: white;
 }

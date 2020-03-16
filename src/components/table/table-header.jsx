@@ -1,31 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import Select from "react-select";
-import uniqid from "uniqid";
-
-import { Button } from "@material-ui/core";
 
 import eData from "../../data/enum";
 
 const TableHeader = props => {
-  const {
-    handleSort,
-    handleBanksChange,
-    onFilter,
-    visiblity,
-    setVisiblity
-  } = props;
+  const { handleSort, handleBanksChange, onFilter, visiblity } = props;
   const enums = eData.map(el => ({ value: el, label: el }));
-  const buttons = [
-    "id",
-    "name",
-    "zip",
-    "bank",
-    "date",
-    "time",
-    "amount",
-    "status"
-  ];
+
   const status = [
     { value: "open", label: "open" },
     { value: "close", label: "close" }
@@ -38,23 +20,7 @@ const TableHeader = props => {
   };
 
   return (
-    <div style={{ fontWeight: "bolder" }}>
-      <div className="cols-vis">
-        {buttons.map(el => {
-          return (
-            <Button
-              size="small"
-              key={uniqid()}
-              onMouseDown={() =>
-                // eslint-disable-next-line prettier/prettier
-                setVisiblity({ ...visiblity, [el]: !visiblity[el] })}
-              className={visiblity[el] ? "active" : "passive"}
-            >
-              {el}
-            </Button>
-          );
-        })}
-      </div>
+    <div className="table-header-wrap">
       <div className="table-header">
         <div
           id="id"
@@ -67,9 +33,10 @@ const TableHeader = props => {
           role="tab"
           tabIndex="0"
           onMouseDown={handleSort}
-          className={`fixed ${visiblity.name ? "visible" : "hidden"}`}
+          style={{ background: "white" }}
+          className={`fixed fxd ${visiblity.name ? "visible" : "hidden"}`}
         >
-          name
+          <span className="name-p">name</span>
         </div>
         <div
           id="integer"
