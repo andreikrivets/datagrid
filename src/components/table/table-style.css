@@ -1,0 +1,151 @@
+body, .main {
+    font-family: 'Baloo Thambi 2', cursive;
+}
+
+.MuiTypography-root {
+    font-family: 'Baloo Thambi 2', cursive !important;
+}
+
+.selected-row-asc {
+    background-color: blue;
+}
+
+.desc:after {
+    content: " ↑"
+}
+
+.asc:after {
+    content: " ↓"
+}
+
+.fixed {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 10px;
+    width: 20%;
+}
+
+.fxd {
+    position: sticky;
+    left: 10px;
+}
+
+.table-header-wrap {
+    font-weight: bold;
+    position: sticky;
+    top: 0px;
+    background: white;
+    width: 1480px;
+    border-bottom: 2px solid rgb(255, 207, 158);
+    z-index: 1
+}
+
+.table-header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.row-el {
+    width: 20%;
+    height: 100%
+}
+
+.selected-row {
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(221, 237, 255) 15%, rgb(249, 249, 255) 50%, rgb(207, 231, 255) 85%, rgb(255, 255, 255) 100%);
+    font-weight: bolder;
+    transition: all 0.5s ease;
+}
+
+.first-col {
+    width: 5%;
+    cursor: pointer;
+}
+
+.table-main {
+    margin: 10px 10px
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid rgb(252, 228, 205);
+    align-items: center;
+    transition: all 0.5s ease;
+    width: 1480px
+}
+
+.unselected-row {
+    background-color: white;
+    font-weight: normal
+}
+
+.row:hover {
+    background-color: rgb(218, 246, 247);
+}
+
+#id, .first-col {
+    text-align: center
+}
+
+.td-name, .td-zip {
+    text-align: left;
+}
+
+.td-banks {
+    margin: 5px
+}
+
+.td-status {
+    text-align: center;
+}
+
+.td-time, 
+.td-date, 
+.td-zip,
+#integer,
+#localDate, 
+#instant {
+    width: 10%;
+    text-align: cetner;
+}
+
+.td-name,
+#string {
+    width: 30%
+}
+
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.active {
+    color: lightseagreen !important;
+    text-transform: none !important
+}
+
+.passive {
+    color: lightpink !important;
+    text-transform: none !important;
+    text-decoration: line-through !important;
+}
+
+.cols-vis {
+    display: flex;
+    justify-content: space-evenly;
+    color: lightskyblue;
+    cursor: pointer;
+}
+
+.name-p {
+    padding: 0 0;
+    margin: 0 0;
+    background: white;
+    padding-right: 20px
+}

@@ -59,8 +59,9 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'prtfl',
-      template: 'index.html'
+      title: 'data-grid',
+      template: 'index.html',
+      favicon: 'src/images/favicon.ico'
     }),
   ],
 };
