@@ -37,6 +37,7 @@ body, .main {
     background: white;
     width: 1480px;
     border-bottom: 2px solid rgb(255, 207, 158);
+    z-index: 1
 }
 
 .table-header {
