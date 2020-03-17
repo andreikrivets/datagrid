@@ -55,6 +55,10 @@ const TableLabel = props => {
               ...provided,
               border: "none",
               width: "300px"
+            }),
+            menu: provided => ({
+              ...provided,
+              zIndex: "100"
             })
           }}
         />
